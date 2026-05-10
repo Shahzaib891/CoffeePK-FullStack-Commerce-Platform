@@ -1,0 +1,182 @@
+{
+  "info": {
+    "_postman_id": "a4d5190f-2074-486b-9977-e7fc0911b6d3",
+    "name": "CoffeePK Test API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "26209677"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{USER_TOKEN}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "HOST",
+      "value": "localhost:7071",
+      "type": "string"
+    },
+    {
+      "key": "USER_TOKEN",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "ADMIN_TOKEN",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                { "key": "email", "value": "", "type": "text" },
+                { "key": "password", "value": "", "type": "text" },
+                { "key": "rememberMe", "value": "true", "type": "text" }
+              ]
+            },
+            "url": {
+              "raw": "{{HOST}}/apiv1/auth/login",
+              "host": ["{{HOST}}"],
+              "path": ["apiv1", "auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                { "key": "email", "value": "", "type": "text" },
+                { "key": "password", "value": "", "type": "text" },
+                { "key": "phone_number", "value": "", "type": "text" }
+              ]
+            },
+            "url": {
+              "raw": "{{HOST}}/apiv1/auth/register",
+              "host": ["{{HOST}}"],
+              "path": ["apiv1", "auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{HOST}}/apiv1/auth/logout",
+              "host": ["{{HOST}}"],
+              "path": ["apiv1", "auth", "logout"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "Get All Products",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{HOST}}/apiv1/products",
+              "host": ["{{HOST}}"],
+              "path": ["apiv1", "products"]
+            }
+          }
+        },
+        {
+          "name": "Get Product By ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{HOST}}/apiv1/products/1",
+              "host": ["{{HOST}}"],
+              "path": ["apiv1", "products", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Transactions",
+      "item": [
+        {
+          "name": "Create Transaction (Fake Payment)",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"payment_id\": 1,\n  \"delivery_id\": 1,\n  \"status_id\": 3,\n  \"notes\": \"Payment successful\",\n  \"address\": \"\",\n  \"products\": [\n    { \"product_id\": 1, \"size_id\": 1, \"qty\": 2 }\n  ]\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{HOST}}/apiv1/transactions",
+              "host": ["{{HOST}}"],
+              "path": ["apiv1", "transactions"]
+            }
+          }
+        },
+        {
+          "name": "Get Transaction History",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{HOST}}/apiv1/transactions?page=1",
+              "host": ["{{HOST}}"],
+              "path": ["apiv1", "transactions"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "User Panel",
+      "item": [
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{HOST}}/apiv1/userPanel/profile",
+              "host": ["{{HOST}}"],
+              "path": ["apiv1", "userPanel", "profile"]
+            }
+          }
+        },
+        {
+          "name": "Add to Cart",
+          "request": {
+            "method": "PATCH",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"product_id\": 1,\n  \"cart\": [{ \"size\": 1, \"count\": 1 }]\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{HOST}}/apiv1/userPanel/cart",
+              "host": ["{{HOST}}"],
+              "path": ["apiv1", "userPanel", "cart"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
